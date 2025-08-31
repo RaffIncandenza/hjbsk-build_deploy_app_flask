@@ -1,39 +1,39 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="./static/mywebscript.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Problem Solver</title>
     <style>
-        .center-heading {
-            text-align: center;
-        }
+        body { font-family: sans-serif; margin: 2em; }
+        .error { color: red; font-weight: bold; }
+        .result { color: green; font-weight: bold; font-size: 1.2em; }
+        .center-heading { text-align: center; }
     </style>
-
 </head>
 <body>
-    <div class="card">
-	<h1 class="center-heading">Basic Mathematical Application</h1> 
-        <div style="padding: 25px 25px 25px 25px;">
-        <div class="card-body">
-            <div class="mb-3">
-                <label class="form-label">Number 1</label>
-                <input type="number" class="form-control" id="num1">
-            </div>
-    
-            <div class="mb-3">
-                <label class="form-label">Number 2</label>
-                <input type="number" class="form-control" id="num2">
-            </div>
-    
-            <div style="padding: 25px;">
-                <button onclick="runAddition()" class="btn btn-secondary">Add</button>
-                <button onclick="runSubtraction()" class="btn btn-secondary">Subtract</button>
-                <button onclick="runMultiplication()" class="btn btn-secondary">Multiply</button>
-            </div>
-	<h1 class="center-heading">Response from server</h1> 
-            <div style="padding: 25px 25px 25px 25px;">
-    
-            <div id="system_response" style="padding: 25px;"></div>
+    <h1>Simple Math Problem Solver</h1>
+    <p>Enter two numbers and select an operation.</p>
+
+    <form>
+        <input type="text" name="num1" placeholder="First Number" value="{{ num1 or '' }}" required>
+        <input type="text" name="num2" placeholder="Second Number" value="{{ num2 or '' }}" required>
+        <br><br>
+        <button type="submit" formaction="/sum">Add</button>
+        <button type="submit" formaction="/sub">Subtract</button>
+        <button type="submit" formaction="/mul">Multiply</button>
+    </form>
+
+    <hr>
+
+    <h1 class="center-heading">Response from server</h1>
+    <div style="padding: 25px 25px 25px 25px;">
+        <div id="system_response" style="padding: 25px;">
+            {% if error %}
+                <p class="error">{{ error }}</p>
+            {% elif result %}
+                <p class="result">Result: {{ result }}</p>
+            {% endif %}
         </div>
     </div>
 </body>
